@@ -1,0 +1,134 @@
+:root {
+  /* Gauge-inspired color palette */
+  --gauge-green: #4ade80;
+  --gauge-yellow: #facc15;
+  --gauge-orange: #fb923c;
+  --gauge-red: #f87171;
+
+  /* Background gradient colors (from icon) */
+  --bg-warm: #fef9c3;
+  --bg-cool: #ddd6fe;
+  --bg-mint: #d1fae5;
+
+  /* Text colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* Accent */
+  --accent: #7c3aed;
+  --accent-light: #a78bfa;
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-solid: #ffffff;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-warm) 0%, var(--bg-mint) 50%, var(--bg-cool) 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  color: var(--text-secondary);
+  max-width: 65ch;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-light);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gauge-green), var(--gauge-yellow));
+}
+
+strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+::selection {
+  background: var(--accent-light);
+  color: white;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}
