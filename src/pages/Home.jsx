@@ -13,6 +13,9 @@ function Home() {
         <Link to="/privacy" className="nav-link">
           Privacy
         </Link>
+        <Link to="/delete-data" className="nav-link">
+          Delete Data
+        </Link>
       </nav>
 
       <main className="hero">

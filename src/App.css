@@ -210,8 +210,41 @@
 }
 
 .section p,
-.section ul {
+.section ul,
+.section ol {
   margin-top: var(--space-sm);
+}
+
+/* Numbered List */
+ol.numbered-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: list-counter;
+}
+
+ol.numbered-list li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  counter-increment: list-counter;
+}
+
+ol.numbered-list li::before {
+  content: counter(list-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: linear-gradient(135deg, var(--gauge-green), var(--gauge-yellow));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 /* Contact Card */

@@ -13,6 +13,9 @@ function Privacy() {
         <Link to="/privacy" className="nav-link">
           Privacy
         </Link>
+        <Link to="/delete-data" className="nav-link">
+          Delete Data
+        </Link>
       </nav>
 
       <main className="content container">
@@ -79,7 +82,7 @@ function Privacy() {
           <p>You have the right to:</p>
           <ul>
             <li>Withdraw from the study at any time</li>
-            <li>Request deletion of your data</li>
+            <li><Link to="/delete-data">Request deletion of your data</Link></li>
             <li>Request a copy of your data</li>
           </ul>
         </section>
