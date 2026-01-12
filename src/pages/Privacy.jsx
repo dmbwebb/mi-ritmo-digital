@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 
+const baseUrl = import.meta.env.BASE_URL
+
 function Privacy() {
   return (
     <div className="page">
       <nav className="nav">
         <Link to="/" className="nav-brand">
-          <img src="/app-icon.png" alt="Phone Dashboard" />
+          <img src={`${baseUrl}app-icon.png`} alt="Phone Dashboard" />
           <span>Phone Dashboard</span>
         </Link>
         <Link to="/privacy" className="nav-link">

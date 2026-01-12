@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 
+const baseUrl = import.meta.env.BASE_URL
+
 function Home() {
   return (
     <div className="page">
       <nav className="nav">
         <Link to="/" className="nav-brand">
-          <img src="/app-icon.png" alt="Phone Dashboard" />
+          <img src={`${baseUrl}app-icon.png`} alt="Phone Dashboard" />
           <span>Phone Dashboard</span>
         </Link>
         <Link to="/privacy" className="nav-link">
@@ -15,7 +17,7 @@ function Home() {
 
       <main className="hero">
         <img
-          src="/app-icon.png"
+          src={`${baseUrl}app-icon.png`}
           alt="Phone Dashboard App Icon"
           className="hero-icon fade-in"
         />
