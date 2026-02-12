@@ -7,7 +7,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/phone-dash-website">
+    <BrowserRouter basename="/mi-ritmo-digital">
       <LanguageProvider>
         <App />
       </LanguageProvider>
