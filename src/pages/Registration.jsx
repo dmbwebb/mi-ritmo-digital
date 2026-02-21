@@ -10,18 +10,18 @@ function Registration() {
     <div className="page">
       <nav className="nav">
         <Link to="/" className="nav-brand">
-          <img src={`${baseUrl}app-icon.png`} alt="Mi Ritmo Digital" />
+          <img src={`${baseUrl}logo.svg`} alt="Mi Ritmo Digital" />
           <span>Mi Ritmo Digital</span>
         </Link>
         <div className="nav-links">
+          <Link to="/register" className="nav-link">
+            {t('navRegister')}
+          </Link>
           <Link to="/privacy" className="nav-link">
             {t('navPrivacy')}
           </Link>
           <Link to="/delete-data" className="nav-link">
             {t('navDeleteData')}
-          </Link>
-          <Link to="/register" className="nav-link">
-            {t('navRegister')}
           </Link>
           <button onClick={toggleLanguage} className="lang-toggle" aria-label="Toggle language">
             {language === 'en' ? 'ES' : 'EN'}
