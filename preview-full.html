@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Ritmo Digital — Full Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --accent:#6C63FF; --accent-bright:#4f8ef7; --accent-glow:rgba(108,99,255,0.18);
+      --gauge-green:#22c55e; --gauge-yellow:#eab308; --gauge-orange:#f97316; --gauge-red:#ef4444;
+      --bg-gradient:linear-gradient(145deg,#ffffff 0%,#f5f3ff 55%,#eff6ff 100%);
+      --text-primary:#0f172a; --text-secondary:#475569; --text-muted:#94a3b8;
+      --surface:rgba(108,99,255,0.06); --surface-hover:rgba(108,99,255,0.10);
+      --surface-solid:#ffffff; --border:rgba(0,0,0,0.08); --border-accent:rgba(108,99,255,0.35);
+      --radius-sm:8px; --radius-md:14px; --radius-lg:22px;
+      --space-xs:.5rem; --space-sm:1rem; --space-md:1.5rem;
+      --space-lg:2.5rem; --space-xl:4rem; --space-2xl:6rem;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    body{font-family:'DM Sans',-apple-system,sans-serif;color:var(--text-primary);line-height:1.7;min-height:100vh;background:var(--bg-gradient);background-attachment:fixed;padding-bottom:56px;}
+    body::before{content:'';position:fixed;top:-15%;left:50%;transform:translateX(-50%);width:70vw;height:55vh;background:radial-gradient(ellipse,rgba(108,99,255,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;}
+    h1,h2,h3{font-family:'Sora',sans-serif;font-weight:700;line-height:1.25;color:var(--text-primary);}
+    h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;}
+    h2{font-size:clamp(1.15rem,2.5vw,1.5rem);font-weight:600;margin-bottom:var(--space-sm);}
+    p{color:var(--text-secondary);max-width:65ch;}
+    a{color:var(--accent);text-decoration:none;transition:color .2s;}
+    a:hover{color:var(--accent-bright);}
+    ul{list-style:none;padding-left:0;}
+    ul li{position:relative;padding-left:1.5rem;margin-bottom:.75rem;color:var(--text-secondary);}
+    ul li::before{content:'';position:absolute;left:0;top:.6rem;width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-bright));}
+    strong{color:var(--text-primary);font-weight:600;}
+    ::selection{background:var(--accent);color:#fff;}
+
+    /* ── PAGE SWITCHER (preview only) ── */
+    .page-switcher{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;border-top:1px solid var(--border);display:flex;justify-content:center;gap:4px;padding:8px 16px;box-shadow:0 -2px 8px rgba(0,0,0,.06);}
+    .page-switcher button{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--text-secondary);padding:.3rem .9rem;border-radius:20px;cursor:pointer;transition:all .2s;}
+    .page-switcher button.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .page-switcher button:hover:not(.active){background:var(--surface);color:var(--text-primary);}
+    .page{display:none;min-height:100vh;flex-direction:column;position:relative;z-index:1;}
+    .page.visible{display:flex;}
+
+    /* ── LOGO SVG helper ── */
+    .logo-svg{display:block;border-radius:10px;}
+
+    /* ── NAV ── */
+    .nav{position:sticky;top:0;z-index:100;padding:0 1.5rem;height:64px;display:flex;justify-content:space-between;align-items:center;gap:.5rem;background:rgba(255,255,255,.85);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06);position:relative;}
+    .nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--accent) 30%,var(--accent-bright) 70%,transparent 100%);opacity:.6;}
+    .nav-links{display:flex;align-items:center;gap:4px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-primary);transition:opacity .2s;}
+    .nav-brand:hover{opacity:.85;}
+    .nav-brand span{font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;letter-spacing:-.01em;color:var(--text-primary);}
+    .nav-link{font-size:.875rem;font-weight:500;color:var(--text-secondary);padding:.4rem .75rem;border-radius:var(--radius-sm);transition:all .2s;cursor:pointer;}
+    .nav-link:hover,.nav-link.current{background:var(--surface-hover);color:var(--text-primary);}
+    .lang-toggle{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);padding:.35rem .75rem;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+    .lang-toggle:hover{background:var(--surface-hover);color:var(--accent);border-color:var(--border-accent);}
+
+    /* ── HERO ── */
+    .hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 1.5rem 3rem;}
+    .hero-icon{width:110px;height:110px;margin-bottom:2rem;border-radius:26px;box-shadow:0 0 0 1px var(--border),0 0 30px rgba(108,99,255,0.12),0 16px 32px rgba(0,0,0,.08);animation:float 6s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    .hero h1{margin-bottom:var(--space-sm);}
+    .hero-subtitle{font-size:1.1rem;color:var(--text-secondary);max-width:460px;line-height:1.65;margin-bottom:0;}
+
+    /* ── TABS ── */
+    .home-tabs{display:flex;gap:4px;margin:1.5rem 0 0;background:rgba(0,0,0,.05);border-radius:12px;padding:4px;}
+    .home-tab{font-family:'Sora',sans-serif;font-size:.9rem;font-weight:600;color:var(--text-secondary);background:transparent;border:none;padding:.55rem 1.25rem;border-radius:9px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .home-tab:hover{color:var(--text-primary);background:rgba(108,99,255,.08);}
+    .home-tab.active{background:#fff;color:var(--accent);box-shadow:0 1px 8px rgba(0,0,0,.10);}
+    .tab-content{display:flex;flex-direction:column;align-items:center;gap:1.25rem;margin-top:1.5rem;animation:fadeInUp .35s ease both;}
+    .tab-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+    .feature-chip{font-size:.82rem;font-weight:500;color:var(--text-secondary);background:rgba(108,99,255,.07);border:1px solid rgba(108,99,255,.15);padding:.3rem .85rem;border-radius:20px;white-space:nowrap;}
+
+    /* ── CTA ── */
+    .cta-link{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;background:var(--accent);border-radius:var(--radius-sm);color:#fff;font-weight:600;font-size:.95rem;transition:all .22s;box-shadow:0 2px 14px var(--accent-glow);position:relative;overflow:hidden;text-decoration:none;}
+    .cta-link::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 60%);pointer-events:none;}
+    .cta-link:hover{background:#5a52e0;color:#fff;transform:translateY(-2px);box-shadow:0 6px 24px rgba(108,99,255,.38);}
+    .cta-link svg{width:16px;height:16px;transition:transform .2s;}
+    .cta-link:hover svg{transform:translateX(4px);}
+    .cta-link--program{background:#0ea5e9;box-shadow:0 2px 14px rgba(14,165,233,.22);}
+    .cta-link--program:hover{background:#0284c7;box-shadow:0 6px 24px rgba(14,165,233,.38);}
+
+    /* ── CONTENT PAGES ── */
+    .container{width:100%;max-width:720px;margin:0 auto;padding:var(--space-lg) var(--space-md);}
+    .content{padding:var(--space-xl) var(--space-md);}
+    .content-header{margin-bottom:var(--space-xl);padding-bottom:var(--space-lg);border-bottom:1px solid var(--border);}
+    .content-header h1{margin-bottom:var(--space-xs);}
+    .last-updated{color:var(--text-muted);font-size:.875rem;}
+    .section{margin-bottom:var(--space-xl);}
+    .section h2{display:flex;align-items:center;gap:10px;}
+    .section h2::before{content:'';display:inline-block;width:3px;height:1.1em;background:linear-gradient(to bottom,var(--accent),var(--accent-bright));border-radius:2px;flex-shrink:0;}
+    .section p,.section ul,.section ol{margin-top:var(--space-sm);}
+    .contact-card{background:var(--surface);border:1px solid var(--border);padding:var(--space-md);border-radius:var(--radius-md);margin-top:var(--space-sm);}
+    .contact-card p{margin:0;line-height:1.8;}
+    .back-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:var(--space-lg);color:var(--text-secondary);font-size:.9rem;transition:color .2s;cursor:pointer;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:16px;height:16px;}
+
+    /* numbered list */
+    ol.numbered-list{list-style:none;padding-left:0;counter-reset:lc;}
+    ol.numbered-list li{position:relative;padding-left:2.25rem;margin-bottom:.75rem;color:var(--text-secondary);counter-increment:lc;}
+    ol.numbered-list li::before{content:counter(lc);position:absolute;left:0;top:0;width:1.5rem;height:1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent-bright));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;}
+
+    /* ── FOOTER ── */
+    .footer{padding:var(--space-md);text-align:center;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border);margin-top:auto;}
+
+    /* ── ANIMATIONS ── */
+    .fade-in{animation:fadeIn .7s ease forwards;}
+    .fade-in-up{opacity:0;animation:fadeInUp .7s ease forwards;}
+    .delay-1{animation-delay:.15s} .delay-2{animation-delay:.3s}
+    .delay-3{animation-delay:.45s} .delay-4{animation-delay:.6s}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+<!-- Shared logo defs helper -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   style="stop-color:#ffffff"/>
+      <stop offset="55%"  style="stop-color:#f5f3ff"/>
+      <stop offset="100%" style="stop-color:#eff6ff"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div class="page visible" id="page-home">
+  <nav class="nav">
+    <a href="#" class="nav-brand" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="36" height="36" class="logo-svg">
+        <defs><linearGradient id="bN" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffffff"/><stop offset="55%" style="stop-color:#f5f3ff"/><stop offset="100%" style="stop-color:#eff6ff"/></linearGradient></defs>
+        <rect width="120" height="120" rx="26" fill="url(#bN)"/>
+        <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+        <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity=".35"/>
+        <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity=".35"/>
+        <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+        <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+        <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+        <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+        <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+        <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+      </svg>
+      <span>Mi Ritmo Digital</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link" onclick="showPage('register',null);return false;">Register</a>
+      <a href="#" class="nav-link" onclick="showPage('privacy',null);return false;">Privacy</a>
+      <a href="#" class="nav-link" onclick="showPage('delete',null);return false;">Delete Data</a>
+      <button class="lang-toggle">ES</button>
+    </div>
+  </nav>
+
+  <main class="hero">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="hero-icon fade-in">
+      <defs><linearGradient id="bH" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffffff"/><stop offset="55%" style="stop-color:#f5f3ff"/><stop offset="100%" style="stop-color:#eff6ff"/></linearGradient></defs>
+      <rect width="120" height="120" rx="26" fill="url(#bH)"/>
+      <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+      <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity=".35"/>
+      <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity=".35"/>
+      <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+      <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+      <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+      <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+      <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+      <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+    </svg>
+
+    <h1 class="fade-in-up delay-1">Mi Ritmo Digital</h1>
+
+    <div class="home-tabs fade-in-up delay-2">
+      <button class="home-tab active" onclick="switchTab('app',this)">The App</button>
+      <button class="home-tab" onclick="switchTab('program',this)">The Parental Program</button>
+    </div>
+
+    <div class="tab-content" id="tab-app">
+      <p class="hero-subtitle">A research app that helps you understand your smartphone usage while protecting your privacy.</p>
+      <div class="tab-features">
+        <span class="feature-chip">📊 Usage tracking</span>
+        <span class="feature-chip">⏱ Time spent in each app</span>
+        <span class="feature-chip">🔒 Private &amp; secure</span>
+      </div>
+      <a href="#" class="cta-link" onclick="showPage('privacy',null);return false;">
+        <span>Learn about your data</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+
+    <div class="tab-content" id="tab-program" style="display:none">
+      <p class="hero-subtitle">A guidance program for parents and caregivers on healthy smartphone use in adolescence.</p>
+      <div class="tab-features">
+        <span class="feature-chip">👨‍👩‍👧 Healthy screen habits</span>
+        <span class="feature-chip">💙 Improve their well-being</span>
+        <span class="feature-chip">🎓 Help them do better in school</span>
+      </div>
+      <a href="#" class="cta-link cta-link--program" onclick="showPage('register',null);return false;">
+        <span>Register to the program</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer fade-in-up delay-4">
+    <p>Built for academic research at Nova School of Business and Economics</p>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE: PRIVACY
+════════════════════════════════════════════ -->
+<div class="page" id="page-privacy">
+  <nav class="nav">
+    <a href="#" class="nav-brand" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="36" height="36" class="logo-svg">
+        <defs><linearGradient id="bP" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffffff"/><stop offset="55%" style="stop-color:#f5f3ff"/><stop offset="100%" style="stop-color:#eff6ff"/></linearGradient></defs>
+        <rect width="120" height="120" rx="26" fill="url(#bP)"/>
+        <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+        <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity=".35"/>
+        <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity=".35"/>
+        <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+        <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+        <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+        <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+        <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+        <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+      </svg>
+      <span>Mi Ritmo Digital</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link" onclick="showPage('register',null);return false;">Register to the program</a>
+      <a href="#" class="nav-link current">Privacy</a>
+      <a href="#" class="nav-link" onclick="showPage('delete',null);return false;">Delete Data</a>
+      <button class="lang-toggle">ES</button>
+    </div>
+  </nav>
+  <main class="content container">
+    <header class="content-header fade-in-up">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last updated: January 2026</p>
+    </header>
+    <section class="section fade-in-up delay-1">
+      <h2>Introduction</h2>
+      <p>Mi Ritmo Digital is developed for academic research purposes. This privacy policy explains how we collect, use, and protect your data when you use the app as part of our research study.</p>
+    </section>
+    <section class="section fade-in-up delay-2">
+      <h2>Data We Collect</h2>
+      <p>The app collects <strong>only</strong> the following information:</p>
+      <ul>
+        <li><strong>App usage statistics:</strong> Which apps you use and for how long</li>
+        <li><strong>Device information:</strong> Device model, operating system version, and a unique device identifier</li>
+        <li><strong>App interaction data:</strong> How you interact with Mi Ritmo Digital features</li>
+      </ul>
+      <p><strong>We do not collect any other data. The app does not access your location, contacts, messages, photos, browsing history, or any personal content on your device.</strong></p>
+    </section>
+    <section class="section fade-in-up delay-3">
+      <h2>How We Use Your Data</h2>
+      <p>Your data is used for:</p>
+      <ul>
+        <li>Displaying your usage statistics within the app</li>
+        <li>Enforcing usage budgets you have set</li>
+        <li>Academic research on smartphone usage patterns</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up delay-4">
+      <h2>Data Storage and Security</h2>
+      <p>Your data is:</p>
+      <ul>
+        <li>Transmitted securely to our research server using encryption</li>
+        <li>Stored on secure servers with restricted access</li>
+        <li>Associated with a de-identified participant code, not your name or email</li>
+        <li>Accessible only to authorized members of the research team</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Data Sharing</h2>
+      <p>We do not sell or share your personal data with third parties. Anonymized, aggregated data may be used in academic publications.</p>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Withdraw from the study at any time</li>
+        <li><a href="#" onclick="showPage('delete',null);return false;">Request deletion of your data</a></li>
+        <li>Request a copy of your data</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Permissions</h2>
+      <p>The app requires the following permissions:</p>
+      <ul>
+        <li><strong>Usage Access:</strong> To track which apps you use and for how long</li>
+        <li><strong>Display over other apps:</strong> To show usage warnings when you reach your budget limits</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Young People's Privacy</h2>
+      <p>This app may be used by participants aged 13 to 17 as part of our research study. For participants under 18, we require signed parental or guardian consent before any data is collected.</p>
+      <p>Parents and guardians have the right to:</p>
+      <ul>
+        <li>Review the data collected from their child</li>
+        <li>Request deletion of their child's data at any time</li>
+        <li>Withdraw their child from the study</li>
+      </ul>
+      <p>We do not knowingly collect data from children under 13.</p>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Data Retention</h2>
+      <p>Identifiable data is deleted when the study ends or when you withdraw from the study. Anonymized, aggregated data may be retained for up to 5 years for research purposes.</p>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy or your data, please contact:</p>
+      <div class="contact-card">
+        <p><strong>Duncan Webb</strong><br>Nova School of Business and Economics<br><a href="mailto:duncan.webb@novasbe.pt">duncan.webb@novasbe.pt</a></p>
+      </div>
+    </section>
+    <a href="#" class="back-link fade-in-up" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+      <span>Back to Home</span>
+    </a>
+  </main>
+  <footer class="footer"><p>Built for academic research at Nova School of Business and Economics</p></footer>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE: DATA DELETION
+════════════════════════════════════════════ -->
+<div class="page" id="page-delete">
+  <nav class="nav">
+    <a href="#" class="nav-brand" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="36" height="36" class="logo-svg">
+        <defs><linearGradient id="bD" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffffff"/><stop offset="55%" style="stop-color:#f5f3ff"/><stop offset="100%" style="stop-color:#eff6ff"/></linearGradient></defs>
+        <rect width="120" height="120" rx="26" fill="url(#bD)"/>
+        <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+        <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity=".35"/>
+        <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity=".35"/>
+        <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+        <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+        <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+        <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+        <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+        <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+      </svg>
+      <span>Mi Ritmo Digital</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link" onclick="showPage('register',null);return false;">Register to the program</a>
+      <a href="#" class="nav-link" onclick="showPage('privacy',null);return false;">Privacy</a>
+      <a href="#" class="nav-link current">Delete Data</a>
+      <button class="lang-toggle">ES</button>
+    </div>
+  </nav>
+  <main class="content container">
+    <header class="content-header fade-in-up">
+      <h1>Data Deletion Request</h1>
+      <p class="last-updated">How to request deletion of your data</p>
+    </header>
+    <section class="section fade-in-up delay-1">
+      <h2>Your Right to Data Deletion</h2>
+      <p>As a participant in our research study, you have the right to request deletion of your personal data at any time. This page explains what data we collect, what gets deleted, and how to submit a request.</p>
+    </section>
+    <section class="section fade-in-up delay-2">
+      <h2>Data We Collect</h2>
+      <p>Mi Ritmo Digital collects the following types of data:</p>
+      <ul>
+        <li><strong>Email address:</strong> Used only during enrollment to link you to your participant code</li>
+        <li><strong>De-identified participant ID:</strong> A unique code that identifies your data without revealing your identity</li>
+        <li><strong>App usage statistics:</strong> Which apps you use and for how long</li>
+        <li><strong>App interaction data:</strong> How you interact with Phone Dashboard features</li>
+        <li><strong>Crash logs:</strong> Technical information collected via Microsoft AppCenter when the app encounters errors</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up delay-3">
+      <h2>What Gets Deleted</h2>
+      <p>When you request data deletion, we will permanently remove:</p>
+      <ul>
+        <li>Your email address from our enrollment records</li>
+        <li>All app usage data linked to your participant ID</li>
+        <li>Your participant profile and settings</li>
+        <li>Any crash logs associated with your device</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up">
+      <h2>What May Be Retained</h2>
+      <p>The following data may be retained after a deletion request:</p>
+      <ul>
+        <li><strong>Anonymized aggregate data:</strong> Statistical summaries that cannot be linked back to you</li>
+        <li><strong>Research records:</strong> Documentation required for research integrity and audit purposes</li>
+      </ul>
+    </section>
+    <section class="section fade-in-up">
+      <h2>How to Request Deletion</h2>
+      <p>To request deletion of your data, please:</p>
+      <ol class="numbered-list">
+        <li>Send an email to the address below with the subject line "Data Deletion Request"</li>
+        <li>Include your participant ID or the email address you used to enroll</li>
+        <li>State that you wish to have your data deleted</li>
+      </ol>
+      <p>We will process your request within 30 days and send you confirmation once your data has been deleted.</p>
+    </section>
+    <section class="section fade-in-up">
+      <h2>Contact</h2>
+      <p>Send your data deletion request to:</p>
+      <div class="contact-card">
+        <p><strong>Duncan Webb</strong><br>Nova School of Business and Economics<br><a href="mailto:duncan.webb@novasbe.pt">duncan.webb@novasbe.pt</a></p>
+      </div>
+      <p style="margin-top:1rem">Please use the subject line: <strong>Data Deletion Request - Mi Ritmo Digital</strong></p>
+    </section>
+    <section class="section fade-in-up">
+      <h2>After Deletion</h2>
+      <p>Once your data is deleted, you will no longer be able to participate in the study. If you only wish to stop using the app but keep your data for the research, you can simply uninstall the app without submitting a deletion request.</p>
+    </section>
+    <a href="#" class="back-link fade-in-up" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+      <span>Back to Home</span>
+    </a>
+  </main>
+  <footer class="footer"><p>Built for academic research at Nova School of Business and Economics</p></footer>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE: REGISTER
+════════════════════════════════════════════ -->
+<div class="page" id="page-register">
+  <nav class="nav">
+    <a href="#" class="nav-brand" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="36" height="36" class="logo-svg">
+        <defs><linearGradient id="bR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffffff"/><stop offset="55%" style="stop-color:#f5f3ff"/><stop offset="100%" style="stop-color:#eff6ff"/></linearGradient></defs>
+        <rect width="120" height="120" rx="26" fill="url(#bR)"/>
+        <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+        <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity=".35"/>
+        <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity=".35"/>
+        <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+        <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+        <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+        <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+        <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+        <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+      </svg>
+      <span>Mi Ritmo Digital</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link current">Register to the program</a>
+      <a href="#" class="nav-link" onclick="showPage('privacy',null);return false;">Privacy</a>
+      <a href="#" class="nav-link" onclick="showPage('delete',null);return false;">Delete Data</a>
+      <button class="lang-toggle">ES</button>
+    </div>
+  </nav>
+  <main class="content container">
+    <header class="content-header fade-in-up">
+      <h1>Mi Ritmo Digital — Registration Form</h1>
+      <p class="last-updated">GUIDANCE PROGRAM FOR PARENTS AND CAREGIVERS ON HEALTHY SMARTPHONE USE IN ADOLESCENCE</p>
+    </header>
+    <section class="section fade-in-up delay-1">
+      <h2>Motivation Video to Join the Program</h2>
+      <p style="margin-top:.75rem;color:var(--text-muted);font-style:italic;">Video embed loads here in the live app.</p>
+    </section>
+    <section class="section fade-in-up delay-2">
+      <h2>Registration Form</h2>
+      <p>Complete the form below to register for the program. Scroll down to fill out all fields.</p>
+      <div style="margin-top:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:3rem 2rem;text-align:center;color:var(--text-muted);">
+        <div style="font-size:2rem;margin-bottom:.75rem;">📋</div>
+        <p style="max-width:none;">Google Form embed loads here in the live app.</p>
+      </div>
+    </section>
+    <a href="#" class="back-link fade-in-up" onclick="showPage('home',null);return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+      <span>Back to Home</span>
+    </a>
+  </main>
+  <footer class="footer"><p>Built for academic research at Nova School of Business and Economics</p></footer>
+</div>
+
+<script>
+  function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+    document.getElementById('page-' + id).classList.add('visible');
+    if (btn) {
+      document.querySelectorAll('.page-switcher button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      const map = {home:0,register:1,privacy:2,delete:3};
+      document.querySelectorAll('.page-switcher button').forEach((b,i) => b.classList.toggle('active', i===map[id]));
+    }
+    window.scrollTo(0,0);
+  }
+
+  function switchTab(id, btn) {
+    document.querySelectorAll('.home-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    const t = document.getElementById('tab-' + id);
+    t.style.display = 'flex';
+    t.style.animation = 'none';
+    requestAnimationFrame(() => t.style.animation = 'fadeInUp .35s ease both');
+  }
+</script>
+
+<!-- PAGE SWITCHER (preview only) -->
+<div class="page-switcher">
+  <button class="active" onclick="showPage('home',this)">🏠 Home</button>
+  <button onclick="showPage('register',this)">📋 Register</button>
+  <button onclick="showPage('privacy',this)">🔒 Privacy</button>
+  <button onclick="showPage('delete',this)">🗑 Delete Data</button>
+</div>
+
+</body>
+</html>

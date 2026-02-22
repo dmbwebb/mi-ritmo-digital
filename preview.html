@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Ritmo Digital — Light Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --accent:        #6C63FF;
+      --accent-bright: #4f8ef7;
+      --accent-glow:   rgba(108, 99, 255, 0.18);
+      --gauge-green:   #22c55e;
+      --gauge-yellow:  #eab308;
+      --gauge-orange:  #f97316;
+      --gauge-red:     #ef4444;
+      --text-primary:  #0f172a;
+      --text-secondary:#475569;
+      --text-muted:    #94a3b8;
+      --surface:       rgba(108,99,255,0.06);
+      --border:        rgba(0,0,0,0.08);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{font-size:16px;}
+    body{
+      font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+      color:var(--text-primary);
+      line-height:1.7;
+      min-height:100vh;
+      background:linear-gradient(145deg,#ffffff 0%,#f5f3ff 55%,#eff6ff 100%);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:'';position:fixed;top:-15%;left:50%;transform:translateX(-50%);
+      width:70vw;height:55vh;
+      background:radial-gradient(ellipse,rgba(108,99,255,0.08) 0%,transparent 70%);
+      pointer-events:none;z-index:0;
+    }
+    h1,h2{font-family:'Sora',sans-serif;font-weight:700;line-height:1.25;color:var(--text-primary);}
+    h1{font-size:clamp(2.2rem,5.5vw,3.2rem);letter-spacing:-0.03em;}
+    p{color:var(--text-secondary);max-width:65ch;}
+    a{color:var(--accent);text-decoration:none;}
+
+    /* ── NAV ── */
+    .nav{
+      position:sticky;top:0;z-index:100;
+      padding:0 1.5rem;height:64px;
+      display:flex;justify-content:space-between;align-items:center;gap:.5rem;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(20px) saturate(160%);
+      -webkit-backdrop-filter:blur(20px) saturate(160%);
+      border-bottom:1px solid var(--border);
+      box-shadow:0 1px 12px rgba(0,0,0,0.06);
+      position:relative;
+    }
+    .nav::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent 0%,var(--accent) 30%,var(--accent-bright) 70%,transparent 100%);
+      opacity:.6;
+    }
+    .nav-links{display:flex;align-items:center;gap:4px;}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-primary);transition:opacity .2s;}
+    .nav-brand:hover{opacity:.85;}
+    .nav-brand img{width:36px;height:36px;border-radius:10px;}
+    .nav-brand span{font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;letter-spacing:-.01em;color:var(--text-primary);}
+    .nav-link{font-size:.875rem;font-weight:500;color:var(--text-secondary);padding:.4rem .75rem;border-radius:8px;transition:all .2s ease;cursor:pointer;}
+    .nav-link:hover{background:rgba(108,99,255,0.08);color:var(--text-primary);}
+    .lang-toggle{
+      font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.06em;
+      color:var(--text-secondary);background:rgba(108,99,255,0.06);
+      border:1px solid var(--border);padding:.35rem .75rem;border-radius:8px;cursor:pointer;transition:all .2s ease;
+    }
+    .lang-toggle:hover{background:rgba(108,99,255,0.12);color:var(--accent);}
+
+    /* ── PAGE & HERO ── */
+    .page{min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1;}
+    .hero{
+      flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:5rem 1.5rem 4rem;
+    }
+    .hero-icon{
+      width:110px;height:110px;margin-bottom:2rem;border-radius:26px;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.08),0 0 40px rgba(108,99,255,0.15),0 16px 32px rgba(0,0,0,0.10);
+      animation:float 6s ease-in-out infinite;
+    }
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+    /* ── GAUGE BARS ── */
+    .gauge-indicator{display:flex;gap:5px;margin-bottom:2rem;align-items:flex-end;}
+    .gauge-bar{width:6px;border-radius:3px;opacity:0;animation:barRise .5s ease forwards;}
+    .gauge-bar:nth-child(1){background:var(--gauge-green); height:14px;animation-delay:.1s;}
+    .gauge-bar:nth-child(2){background:var(--gauge-green); height:18px;animation-delay:.2s;}
+    .gauge-bar:nth-child(3){background:var(--gauge-yellow);height:22px;animation-delay:.3s;}
+    .gauge-bar:nth-child(4){background:var(--gauge-yellow);height:26px;animation-delay:.4s;}
+    .gauge-bar:nth-child(5){background:var(--gauge-orange);height:30px;animation-delay:.5s;}
+    .gauge-bar:nth-child(6){background:var(--gauge-red);   height:34px;animation-delay:.6s;}
+    @keyframes barRise{0%{opacity:0;transform:scaleY(0);transform-origin:bottom;}100%{opacity:1;transform:scaleY(1);transform-origin:bottom;}}
+
+    /* ── TABS ── */
+    .home-tabs{
+      display:flex;gap:4px;margin:1.75rem 0 0;
+      background:rgba(0,0,0,0.05);border-radius:12px;padding:4px;
+    }
+    .home-tab{
+      font-family:'Sora',sans-serif;font-size:.9rem;font-weight:600;
+      color:var(--text-secondary);background:transparent;border:none;
+      padding:.55rem 1.25rem;border-radius:9px;cursor:pointer;transition:all .2s ease;white-space:nowrap;
+    }
+    .home-tab:hover{color:var(--text-primary);background:rgba(108,99,255,0.08);}
+    .home-tab.active{background:#ffffff;color:var(--accent);box-shadow:0 1px 8px rgba(0,0,0,0.10);}
+
+    /* ── TAB CONTENT ── */
+    .tab-content{
+      display:flex;flex-direction:column;align-items:center;
+      gap:1.25rem;margin-top:1.5rem;
+    }
+    .hero-subtitle{font-size:1.1rem;color:var(--text-secondary);max-width:460px;line-height:1.65;}
+    .tab-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+    .feature-chip{
+      font-size:.82rem;font-weight:500;color:var(--text-secondary);
+      background:rgba(108,99,255,0.07);border:1px solid rgba(108,99,255,0.15);
+      padding:.3rem .85rem;border-radius:20px;white-space:nowrap;
+    }
+
+    /* ── CTA ── */
+    .cta-link{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.75rem 1.5rem;background:var(--accent);border-radius:8px;
+      color:#fff;font-weight:600;font-size:.95rem;letter-spacing:.01em;
+      transition:all .22s ease;box-shadow:0 2px 14px rgba(108,99,255,0.22);
+      position:relative;overflow:hidden;text-decoration:none;
+    }
+    .cta-link::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 60%);pointer-events:none;}
+    .cta-link:hover{background:#5a52e0;color:#fff;transform:translateY(-2px);box-shadow:0 6px 24px rgba(108,99,255,0.38);}
+    .cta-link svg{width:16px;height:16px;transition:transform .2s ease;}
+    .cta-link:hover svg{transform:translateX(4px);}
+    .cta-link--program{background:#0ea5e9;box-shadow:0 2px 14px rgba(14,165,233,0.22);}
+    .cta-link--program:hover{background:#0284c7;box-shadow:0 6px 24px rgba(14,165,233,0.38);}
+
+    /* ── FOOTER ── */
+    .footer{padding:1.5rem;text-align:center;color:var(--text-muted);font-size:.8rem;border-top:1px solid var(--border);}
+
+    /* ── ANIMATIONS ── */
+    .fade-in{animation:fadeIn .7s ease forwards;}
+    .fade-in-up{opacity:0;animation:fadeInUp .7s ease forwards;}
+    .delay-1{animation-delay:.15s;}
+    .delay-2{animation-delay:.3s;}
+    .delay-4{animation-delay:.6s;}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* ── PREVIEW BADGE ── */
+    .preview-badge{
+      position:fixed;bottom:20px;right:20px;
+      background:var(--accent);color:#fff;
+      font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;
+      padding:.4rem .9rem;border-radius:20px;z-index:999;
+      box-shadow:0 2px 12px rgba(108,99,255,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="36" height="36" style="border-radius:10px;display:block">
+      <defs>
+        <linearGradient id="bgN" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   style="stop-color:#ffffff"/>
+          <stop offset="100%" style="stop-color:#ede9fe"/>
+        </linearGradient>
+      </defs>
+      <!-- Background -->
+      <rect width="120" height="120" rx="26" fill="url(#bgGrad)"/>
+      <!-- Phone outline -->
+      <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+      <!-- Speaker notch -->
+      <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity="0.35"/>
+      <!-- Home bar -->
+      <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity="0.35"/>
+      <!-- Gauge bars — overlapping the phone, bottom-aligned at y=92 -->
+      <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+      <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+      <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+      <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+      <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+      <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+    </svg>
+      <span>Mi Ritmo Digital</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Privacy</a>
+      <a href="#" class="nav-link">Delete Data</a>
+      <a href="#" class="nav-link">Register</a>
+      <button class="lang-toggle">ES</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main class="hero">
+
+    <!-- Logo -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="hero-icon fade-in">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   style="stop-color:#ffffff"/>
+          <stop offset="55%"  style="stop-color:#f5f3ff"/>
+          <stop offset="100%" style="stop-color:#eff6ff"/>
+        </linearGradient>
+      </defs>
+      <!-- Background -->
+      <rect width="120" height="120" rx="26" fill="url(#bgGrad)"/>
+      <!-- Phone outline -->
+      <rect x="26" y="8" width="68" height="104" rx="14" fill="none" stroke="#6C63FF" stroke-width="3.5"/>
+      <!-- Speaker notch -->
+      <rect x="46" y="16" width="28" height="4" rx="2" fill="#6C63FF" opacity="0.35"/>
+      <!-- Home bar -->
+      <rect x="45" y="104" width="30" height="3" rx="1.5" fill="#6C63FF" opacity="0.35"/>
+      <!-- Gauge bars — overlapping the phone, bottom-aligned at y=92 -->
+      <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+      <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+      <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+      <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+      <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+      <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+    </svg>
+
+    <h1 class="fade-in-up delay-1">Mi Ritmo Digital</h1>
+
+    <!-- Tabs -->
+    <div class="home-tabs fade-in-up delay-2" id="tabs">
+      <button class="home-tab active" onclick="switchTab('app', this)">The App</button>
+      <button class="home-tab"        onclick="switchTab('program', this)">The Parental Program</button>
+    </div>
+
+    <!-- Tab: The App -->
+    <div class="tab-content" id="tab-app">
+      <p class="hero-subtitle">
+        A research app that helps you understand your smartphone usage while protecting your privacy.
+      </p>
+      <div class="tab-features">
+        <span class="feature-chip">📊 Usage tracking</span>
+        <span class="feature-chip">⏱ Time spent in each app</span>
+        <span class="feature-chip">🔒 Private &amp; secure</span>
+      </div>
+      <a href="#" class="cta-link">
+        <span>Learn about your data</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Tab: The Parental Program -->
+    <div class="tab-content" id="tab-program" style="display:none">
+      <p class="hero-subtitle">
+        A guidance program for parents and caregivers on healthy smartphone use in adolescence.
+      </p>
+      <div class="tab-features">
+        <span class="feature-chip">👨‍👩‍👧 Healthy screen habits</span>
+        <span class="feature-chip">💙 Improve their well-being </span>
+        <span class="feature-chip">🎓 Help them do better in school </span>
+      </div>
+      <a href="#" class="cta-link cta-link--program">
+        <span>Register Now</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer fade-in-up delay-4">
+    <p>Built for academic research at Nova School of Business and Economics</p>
+  </footer>
+</div>
+
+<div class="preview-badge">✦ LIGHT PREVIEW</div>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.home-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    const target = document.getElementById('tab-' + id);
+    target.style.display = 'flex';
+    target.style.animation = 'none';
+    requestAnimationFrame(() => {
+      target.style.animation = 'fadeInUp .35s ease both';
+    });
+  }
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const translations = {
     // Nav
     navPrivacy: 'Privacy',
     navDeleteData: 'Delete Data',
-    navRegister: 'Register to the program',
+    navRegister: 'Register',
 
     // Home — tabs
     tabApp: 'The App',
@@ -134,7 +134,7 @@ const translations = {
     // Nav
     navPrivacy: 'Privacidad',
     navDeleteData: 'Eliminar Datos',
-    navRegister: 'Regístrate al programa',
+    navRegister: 'Registro',
 
     // Home — tabs
     tabApp: 'La App',
