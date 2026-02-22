@@ -14,17 +14,17 @@ const translations = {
     tabProgram: 'The Parental Program',
 
     // Home — App tab
-    heroSubtitle: 'A research app that helps you understand your smartphone usage by tracking time spent in each app.',
+    heroSubtitle: 'A research app that helps you understand your smartphone usage.',
     featureUsage: 'Usage tracking',
-    featureBudgets: 'App budgets',
+    featureBudgets: 'Time spent in each app',
     featurePrivacy: 'Private & secure',
     ctaText: 'Learn about your data',
 
     // Home — Parental Program tab
     programSubtitle: 'A guidance program for parents and caregivers on healthy smartphone use in adolescence.',
-    featureParents: 'For parents & caregivers',
-    featureAdolescent: 'Adolescent screen time',
-    featureResearch: 'Academic research',
+    featureParents: 'Healthy screen habits',
+    featureAdolescent: 'Improve their well-being',
+    featureResearch: 'Help them do better in school',
     programCta: 'Register for the program',
 
     footer: 'Built for academic research at Nova School of Business and Economics',
@@ -141,7 +141,7 @@ const translations = {
     tabProgram: 'El Programa Parental',
 
     // Home — App tab
-    heroSubtitle: 'Una aplicación de investigación que te ayuda a entender tu uso del smartphone rastreando el tiempo que pasas en cada aplicación.',
+    heroSubtitle: 'Una aplicación de investigación que te ayuda a entender tu uso del celular.',
     featureUsage: 'Seguimiento de uso',
     featureBudgets: 'Límites por app',
     featurePrivacy: 'Privado y seguro',
@@ -149,10 +149,10 @@ const translations = {
 
     // Home — Parental Program tab
     programSubtitle: 'Un programa de orientación para padres, madres y cuidadores sobre el uso saludable del celular en la adolescencia.',
-    featureParents: 'Para padres y cuidadores',
-    featureAdolescent: 'Tiempo de pantalla adolescente',
-    featureResearch: 'Investigación académica',
-    programCta: 'Regístrate en el programa',
+    featureParents: 'habitos saludables del celular',
+    featureAdolescent: 'Mejora su bienestar emocional',
+    featureResearch: 'Mejora su aprendizaje',
+    programCta: 'Regístrate ahora',
 
     footer: 'Desarrollado para investigación académica en Nova School of Business and Economics',
 
