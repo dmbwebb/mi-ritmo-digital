@@ -149,7 +149,7 @@ const translations = {
 
     // Home — Parental Program tab
     programSubtitle: 'Un programa de orientación para padres, madres y cuidadores sobre el uso saludable del celular en la adolescencia.',
-    featureParents: 'habitos saludables del celular',
+    featureParents: 'Hábitos saludables del celular',
     featureAdolescent: 'Mejora su bienestar emocional',
     featureResearch: 'Mejora su aprendizaje',
     programCta: 'Regístrate ahora',

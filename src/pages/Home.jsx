@@ -88,7 +88,7 @@ function Home() {
             </p>
             <div className="tab-features">
               <div className="feature-chip">👨‍👩‍👧 {t('featureParents')}</div>
-              <div className="feature-chip">📱 {t('featureAdolescent')}</div>
+              <div className="feature-chip">💙 {t('featureAdolescent')}</div>
               <div className="feature-chip">🎓 {t('featureResearch')}</div>
             </div>
             <Link to="/register" className="cta-link cta-link--program">
