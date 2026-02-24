@@ -36,6 +36,19 @@ function Registration() {
         </header>
 
         <section className="section fade-in-up delay-1">
+          <h2>Solicita más información sobre el programa</h2>
+          <div className="form-embed">
+            <iframe
+              src="https://whatsform.com/8aHdM4"
+              width="100%"
+              height="600"
+              frameBorder="0"
+              title="Solicita más información sobre el programa"
+            />
+          </div>
+        </section>
+
+        <section className="section fade-in-up delay-1">
           <h2>{t('registerVideoTitle')}</h2>
           <div className="video-embed">
             <iframe
