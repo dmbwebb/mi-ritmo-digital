@@ -10,7 +10,7 @@ function DataDeletion() {
     <div className="page">
       <nav className="nav">
         <Link to="/" className="nav-brand">
-          <img src={`${baseUrl}logo.svg`} alt="Mi Ritmo Digital" />
+          <img src={`${baseUrl}logo.png`} alt="Mi Ritmo Digital" />
           <span>Mi Ritmo Digital</span>
         </Link>
         <div className="nav-links">
