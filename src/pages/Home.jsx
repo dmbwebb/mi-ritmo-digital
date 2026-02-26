@@ -10,11 +10,17 @@ function Home() {
 
   return (
     <div className="page">
-      {/* Decorative background blobs */}
-      <div className="home-decor" aria-hidden="true">
-        <div className="decor-blob decor-blob--1" />
-        <div className="decor-blob decor-blob--2" />
-        <div className="decor-blob decor-blob--3" />
+      {/* Decorative background waves */}
+      <div className="home-waves" aria-hidden="true">
+        <svg className="wave wave--blue" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,100 C180,170 360,30 540,100 C720,170 900,40 1080,110 C1260,180 1380,70 1440,110 L1440,10 C1380,50 1260,150 1080,80 C900,10 720,140 540,70 C360,0 180,130 0,60 Z" />
+        </svg>
+        <svg className="wave wave--yellow" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,70 C240,150 480,10 720,90 C960,170 1200,30 1440,110 L1440,150 C1200,70 960,210 720,130 C480,50 240,190 0,110 Z" />
+        </svg>
+        <svg className="wave wave--coral" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,90 C360,170 720,10 1080,90 C1260,130 1380,50 1440,90 L1440,150 C1380,110 1260,190 1080,150 C720,70 360,230 0,150 Z" />
+        </svg>
       </div>
 
       <nav className="nav">

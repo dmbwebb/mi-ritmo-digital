@@ -103,9 +103,9 @@
 }
 
 /* ═══════════════════════════════════════
-   DECORATIVE BACKGROUND BLOBS
+   DECORATIVE BACKGROUND WAVES
 ═══════════════════════════════════════ */
-.home-decor {
+.home-waves {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -113,55 +113,50 @@
   overflow: hidden;
 }
 
-.decor-blob {
+.wave {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
+  width: 130%;
+  left: -15%;
 }
 
-.decor-blob--1 {
-  width: 500px;
-  height: 500px;
-  background: var(--blue);
-  top: -18%;
-  right: -10%;
+.wave--blue {
+  top: 2%;
+  height: 38vh;
+  fill: var(--blue);
+  opacity: 0.12;
+  animation: waveDrift1 22s ease-in-out infinite;
+}
+
+.wave--yellow {
+  top: 38%;
+  height: 32vh;
+  fill: var(--yellow);
+  opacity: 0.1;
+  transform: scaleX(-1);
+  animation: waveDrift2 26s ease-in-out infinite;
+}
+
+.wave--coral {
+  bottom: 0;
+  height: 32vh;
+  fill: var(--coral);
   opacity: 0.09;
-  animation: blobDrift1 20s ease-in-out infinite;
+  animation: waveDrift3 20s ease-in-out infinite;
 }
 
-.decor-blob--2 {
-  width: 450px;
-  height: 450px;
-  background: var(--yellow);
-  bottom: -12%;
-  left: -12%;
-  opacity: 0.08;
-  animation: blobDrift2 25s ease-in-out infinite;
+@keyframes waveDrift1 {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(-30px); }
 }
 
-.decor-blob--3 {
-  width: 300px;
-  height: 300px;
-  background: var(--coral);
-  top: 45%;
-  left: 55%;
-  opacity: 0.05;
-  animation: blobDrift3 18s ease-in-out infinite;
+@keyframes waveDrift2 {
+  0%, 100% { transform: scaleX(-1) translateX(0); }
+  50%      { transform: scaleX(-1) translateX(25px); }
 }
 
-@keyframes blobDrift1 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(-30px, 20px); }
-}
-
-@keyframes blobDrift2 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(25px, -15px); }
-}
-
-@keyframes blobDrift3 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(-20px, -25px); }
+@keyframes waveDrift3 {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(-20px); }
 }
 
 /* ═══════════════════════════════════════
@@ -272,43 +267,37 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0.85rem 1.4rem;
-  border-radius: 16px;
-  color: white;
+  padding: 0.6rem 1.15rem;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   letter-spacing: 0.01em;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  border: 1.5px solid;
+  background: white;
   cursor: default;
+  transition: transform 0.2s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .feature-card--blue {
-  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.28);
-}
-.feature-card--blue:hover {
-  box-shadow: 0 10px 36px rgba(37, 99, 235, 0.38);
+  color: #2563EB;
+  border-color: rgba(37, 99, 235, 0.25);
+  background: rgba(37, 99, 235, 0.06);
 }
 
 .feature-card--yellow {
-  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
-  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.28);
-  color: #422006;
-}
-.feature-card--yellow:hover {
-  box-shadow: 0 10px 36px rgba(245, 158, 11, 0.38);
+  color: #B45309;
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.07);
 }
 
 .feature-card--coral {
-  background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
-  box-shadow: 0 6px 24px rgba(239, 68, 68, 0.28);
-}
-.feature-card--coral:hover {
-  box-shadow: 0 10px 36px rgba(239, 68, 68, 0.38);
+  color: #DC2626;
+  border-color: rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.06);
 }
 
 .feature-card__icon {
@@ -327,15 +316,15 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  padding: 0.85rem 2rem;
+  padding: 1rem 2.5rem;
   background: var(--blue);
   border-radius: 50px;
   color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   letter-spacing: 0.01em;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.3);
   position: relative;
   overflow: hidden;
 }
