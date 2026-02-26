@@ -10,6 +10,13 @@ function Home() {
 
   return (
     <div className="page">
+      {/* Decorative background blobs */}
+      <div className="home-decor" aria-hidden="true">
+        <div className="decor-blob decor-blob--1" />
+        <div className="decor-blob decor-blob--2" />
+        <div className="decor-blob decor-blob--3" />
+      </div>
+
       <nav className="nav">
         <Link to="/" className="nav-brand">
           <img src={`${baseUrl}logo.svg`} alt="Mi Ritmo Digital" />
@@ -66,10 +73,19 @@ function Home() {
             <p className="hero-subtitle">
               {t('heroSubtitle')}
             </p>
-            <div className="tab-features">
-              <div className="feature-chip">📊 {t('featureUsage')}</div>
-              <div className="feature-chip">⏱ {t('featureBudgets')}</div>
-              <div className="feature-chip">🔒 {t('featurePrivacy')}</div>
+            <div className="feature-cards">
+              <div className="feature-card feature-card--blue">
+                <span className="feature-card__icon">📊</span>
+                <span className="feature-card__label">{t('featureUsage')}</span>
+              </div>
+              <div className="feature-card feature-card--yellow">
+                <span className="feature-card__icon">⏱</span>
+                <span className="feature-card__label">{t('featureBudgets')}</span>
+              </div>
+              <div className="feature-card feature-card--coral">
+                <span className="feature-card__icon">🔒</span>
+                <span className="feature-card__label">{t('featurePrivacy')}</span>
+              </div>
             </div>
             <Link to="/privacy" className="cta-link">
               <span>{t('ctaText')}</span>
@@ -86,10 +102,19 @@ function Home() {
             <p className="hero-subtitle">
               {t('programSubtitle')}
             </p>
-            <div className="tab-features">
-              <div className="feature-chip">👨‍👩‍👧 {t('featureParents')}</div>
-              <div className="feature-chip">💙 {t('featureAdolescent')}</div>
-              <div className="feature-chip">🎓 {t('featureResearch')}</div>
+            <div className="feature-cards">
+              <div className="feature-card feature-card--blue">
+                <span className="feature-card__icon">👨‍👩‍👧</span>
+                <span className="feature-card__label">{t('featureParents')}</span>
+              </div>
+              <div className="feature-card feature-card--yellow">
+                <span className="feature-card__icon">💙</span>
+                <span className="feature-card__label">{t('featureAdolescent')}</span>
+              </div>
+              <div className="feature-card feature-card--coral">
+                <span className="feature-card__icon">🎓</span>
+                <span className="feature-card__label">{t('featureResearch')}</span>
+              </div>
             </div>
             <Link to="/register" className="cta-link cta-link--program">
               <span>{t('programCta')}</span>

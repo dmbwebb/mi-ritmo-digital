@@ -1,29 +1,37 @@
 :root {
-  /* Gauge colors — keep vivid */
+  /* Gauge colors */
   --gauge-green:  #22c55e;
   --gauge-yellow: #eab308;
   --gauge-orange: #f97316;
   --gauge-red:    #ef4444;
 
-  /* Brand accents */
-  --accent:        #6C63FF;
-  --accent-bright: #4f8ef7;
-  --accent-glow:   rgba(108, 99, 255, 0.18);
+  /* Flyer-inspired palette */
+  --blue:         #2563EB;
+  --blue-light:   #3B82F6;
+  --yellow:       #F59E0B;
+  --yellow-light: #FBBF24;
+  --coral:        #EF4444;
+  --coral-light:  #F87171;
 
-  /* Light backgrounds */
-  --bg-gradient: linear-gradient(145deg, #ffffff 0%, #f5f3ff 55%, #eff6ff 100%);
+  /* Brand accents — mapped to blue */
+  --accent:        #2563EB;
+  --accent-bright: #3B82F6;
+  --accent-glow:   rgba(37, 99, 235, 0.18);
+
+  /* Warm light background */
+  --bg-gradient: linear-gradient(150deg, #ffffff 0%, #FFF8F0 45%, #F0F5FF 100%);
 
   /* Text */
-  --text-primary:   #0f172a;
+  --text-primary:   #1E293B;
   --text-secondary: #475569;
   --text-muted:     #94a3b8;
 
   /* Surfaces */
-  --surface:        rgba(108, 99, 255, 0.06);
-  --surface-hover:  rgba(108, 99, 255, 0.10);
+  --surface:        rgba(37, 99, 235, 0.05);
+  --surface-hover:  rgba(37, 99, 235, 0.09);
   --surface-solid:  #ffffff;
-  --border:         rgba(0, 0, 0, 0.08);
-  --border-accent:  rgba(108, 99, 255, 0.35);
+  --border:         rgba(0, 0, 0, 0.07);
+  --border-accent:  rgba(37, 99, 235, 0.30);
 
   /* Spacing */
   --space-xs:  0.5rem;
@@ -34,9 +42,9 @@
   --space-2xl: 6rem;
 
   /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,20 +61,20 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Sora', sans-serif;
-  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
   line-height: 1.25;
   color: var(--text-primary);
 }
 
 h1 {
   font-size: clamp(2.2rem, 5.5vw, 3.5rem);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: clamp(1.25rem, 3vw, 1.6rem);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: var(--space-sm);
 }
 
@@ -102,18 +110,18 @@ ul li::before {
 
 strong { color: var(--text-primary); font-weight: 600; }
 
-::selection { background: var(--accent); color: white; }
+::selection { background: var(--blue); color: white; }
 
-/* Soft ambient glow — top center */
+/* Subtle warm ambient glow */
 body::before {
   content: '';
   position: fixed;
-  top: -15%;
+  top: -20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 70vw;
-  height: 55vh;
-  background: radial-gradient(ellipse, rgba(108, 99, 255, 0.08) 0%, transparent 70%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(ellipse, rgba(37, 99, 235, 0.05) 0%, rgba(245, 158, 11, 0.025) 50%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
