@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Ritmo Digital — Intervention Timeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #f8fafc;
+    color: #1E293B;
+    padding: 40px 20px 60px;
+  }
+
+  /* ── Page wrapper ─────────────────────────────────────────────────────── */
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0,0,0,.07);
+    padding: 40px 48px 52px;
+  }
+
+  /* ── Header ──────────────────────────────────────────────────────────── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .logo { width: 52px; height: 52px; flex-shrink: 0; }
+  .header-text h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1E293B;
+    line-height: 1.1;
+  }
+  .header-text p {
+    font-size: 13px;
+    color: #64748B;
+    margin-top: 2px;
+  }
+
+  /* ── Timeline wrapper ─────────────────────────────────────────────────── */
+  .timeline {
+    position: relative;
+    padding: 0 0 16px;
+  }
+
+  /* Spine */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #CBD5E1;
+    z-index: 0;
+  }
+
+  /* ── Rows ─────────────────────────────────────────────────────────────── */
+  .row {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: 72px;
+    margin-bottom: 12px;
+  }
+
+  /* half-width spacers */
+  .gap { flex: 0 0 50%; }
+
+  /* card slot */
+  .slot {
+    flex: 0 0 calc(50% - 28px);
+  }
+  .row.left  .slot { order: 1; padding-right: 12px; }
+  .row.right .slot { order: 3; padding-left:  12px; }
+  .row.left  .gap  { order: 3; }
+  .row.right .gap  { order: 1; }
+
+  /* spine dot */
+  .dot-wrap {
+    flex: 0 0 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+    z-index: 2;
+  }
+  .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1.5px currentColor;
+    flex-shrink: 0;
+  }
+
+  /* ── Card ─────────────────────────────────────────────────────────────── */
+  .card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 10px 12px 10px 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    line-height: 1.35;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    border-radius: 8px 0 0 8px;
+  }
+  .card .tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    margin-bottom: 3px;
+  }
+  .card .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #1E293B;
+    margin-bottom: 3px;
+  }
+  .card .sub {
+    font-size: 11px;
+    font-style: italic;
+    color: #64748B;
+  }
+
+  /* Card themes */
+  .card.slate  { background: #F8FAFC; border-color: #CBD5E1; }
+  .card.slate::before  { background: #64748B; }
+  .card.slate  .tag    { color: #64748B; }
+  .dot.slate   { color: #64748B; background: #64748B; }
+
+  .card.blue   { background: #EFF6FF; border-color: #BFDBFE; }
+  .card.blue::before  { background: #2563EB; }
+  .card.blue   .tag   { color: #2563EB; }
+  .dot.blue    { color: #2563EB; background: #2563EB; }
+
+  .card.amber  { background: #FFFBEB; border-color: #FDE68A; }
+  .card.amber::before { background: #F59E0B; }
+  .card.amber  .tag   { color: #F59E0B; }
+  .dot.amber   { color: #F59E0B; background: #F59E0B; }
+
+  .card.coral  { background: #FEF2F2; border-color: #FECACA; }
+  .card.coral::before { background: #EF4444; }
+  .card.coral  .tag   { color: #EF4444; }
+  .dot.coral   { color: #EF4444; background: #EF4444; }
+
+  .card.green  { background: #F0FDF4; border-color: #BBF7D0; }
+  .card.green::before { background: #22C55E; }
+  .card.green  .tag   { color: #22C55E; }
+  .dot.green   { color: #22C55E; background: #22C55E; }
+
+  /* ── Module band ──────────────────────────────────────────────────────── */
+  .band {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 6px 0;
+    margin: 6px 0 10px;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .band.blue  { background: #DBEAFE; color: #1D4ED8; border: 1px solid #BFDBFE; }
+  .band.amber { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+  .band.coral { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
+
+  /* ── WhatsApp nudge ───────────────────────────────────────────────────── */
+  .wa-row {
+    display: flex;
+    justify-content: center;
+    margin: -2px 0 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .wa-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #16A34A;
+    letter-spacing: .1px;
+  }
+  .wa-pill svg { flex-shrink: 0; }
+
+  /* ── Post-intervention ────────────────────────────────────────────────── */
+  .post-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .post-card {
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    border-radius: 8px;
+    padding: 10px 20px 10px 16px;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .post-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    border-radius: 8px 0 0 8px;
+    background: #22C55E;
+  }
+  .post-card .tag  { font-size: 10.5px; font-weight: 700; color: #16A34A; margin-bottom: 3px; }
+  .post-card .title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13.5px; font-weight: 800; color: #1E293B; margin-bottom: 3px;
+  }
+  .post-card .sub  { font-size: 11px; font-style: italic; color: #64748B; }
+
+  /* Dot on spine for post card */
+  .post-dot-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .post-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #22C55E;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1.5px #22C55E;
+  }
+
+  /* ── Legend ───────────────────────────────────────────────────────────── */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid #E2E8F0;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: #475569;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Print / A4 ───────────────────────────────────────────────────────── */
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; border-radius: 0; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   style="stop-color:#ffffff"/>
+          <stop offset="55%"  style="stop-color:#F0F5FF"/>
+          <stop offset="100%" style="stop-color:#FFF8F0"/>
+        </linearGradient>
+      </defs>
+      <rect width="120" height="120" rx="26" fill="url(#bg)"/>
+      <rect x="26" y="8"  width="68" height="104" rx="14" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+      <rect x="46" y="16" width="28" height="4"   rx="2"  fill="#2563EB" opacity=".35"/>
+      <rect x="45" y="104" width="30" height="3"  rx="1.5" fill="#2563EB" opacity=".35"/>
+      <rect x="35" y="78" width="5" height="14" rx="2.5" fill="#22c55e"/>
+      <rect x="44" y="74" width="5" height="18" rx="2.5" fill="#22c55e"/>
+      <rect x="53" y="70" width="5" height="22" rx="2.5" fill="#eab308"/>
+      <rect x="62" y="66" width="5" height="26" rx="2.5" fill="#eab308"/>
+      <rect x="71" y="62" width="5" height="30" rx="2.5" fill="#f97316"/>
+      <rect x="80" y="58" width="5" height="34" rx="2.5" fill="#ef4444"/>
+    </svg>
+    <div class="header-text">
+      <h1>Mi Ritmo Digital</h1>
+      <p>Intervention Timeline</p>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+
+    <!-- T0 Recruitment -->
+    <div class="row left">
+      <div class="slot">
+        <div class="card slate">
+          <div class="tag">T0  ·  Recruitment</div>
+          <div class="title">Parents Enrolled</div>
+          <div class="sub">Via schools</div>
+        </div>
+      </div>
+      <div class="dot-wrap"><div class="dot slate"></div></div>
+      <div class="gap"></div>
+    </div>
+
+    <!-- Call 0 -->
+    <div class="row right">
+      <div class="gap"></div>
+      <div class="dot-wrap"><div class="dot slate"></div></div>
+      <div class="slot">
+        <div class="card slate">
+          <div class="tag">Call 0  ·  Day 0</div>
+          <div class="title">Introduction</div>
+          <div class="sub">Build rapport · Explain programme · Set expectations</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1 band -->
+    <div class="band blue">Module 1 — Healthy Sleep Habits</div>
+
+    <!-- Call 1 -->
+    <div class="row left">
+      <div class="slot">
+        <div class="card blue">
+          <div class="tag">Call 1  ·  Day 1</div>
+          <div class="title">Sleep · Awareness &amp; First Commitment</div>
+          <div class="sub">Goals: 8 h sleep · phones out of bedroom at night</div>
+        </div>
+      </div>
+      <div class="dot-wrap"><div class="dot blue"></div></div>
+      <div class="gap"></div>
+    </div>
+
+    <!-- WhatsApp nudge -->
+    <div class="wa-row">
+      <div class="wa-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="#22C55E"/>
+          <path d="M8.5 9.5c.5 1 1.5 3 3 4.5 1.5 1.5 3.5 2.5 4.5 3l1-2-2-1-1 1c-1-.5-2-1.5-3-2.5s-2-2-2.5-3l1-1-1-2-2 1z" fill="white"/>
+        </svg>
+        WhatsApp nudges  ·  Days 2–3
+      </div>
+    </div>
+
+    <!-- Call 2 -->
+    <div class="row right">
+      <div class="gap"></div>
+      <div class="dot-wrap"><div class="dot blue"></div></div>
+      <div class="slot">
+        <div class="card blue">
+          <div class="tag">Call 2  ·  Day 4</div>
+          <div class="title">Sleep · Reinforcement</div>
+          <div class="sub">Review commitment · Problem-solve barriers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2 band -->
+    <div class="band amber">Module 2 — Healthy Screen Time</div>
+
+    <!-- Call 3 -->
+    <div class="row left">
+      <div class="slot">
+        <div class="card amber">
+          <div class="tag">Call 3  ·  Day 7</div>
+          <div class="title">Screen Time · Awareness &amp; First Commitment</div>
+          <div class="sub">Goals: &lt;1 h social media · monitor · parental controls</div>
+        </div>
+      </div>
+      <div class="dot-wrap"><div class="dot amber"></div></div>
+      <div class="gap"></div>
+    </div>
+
+    <!-- WhatsApp nudge -->
+    <div class="wa-row">
+      <div class="wa-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="#22C55E"/>
+          <path d="M8.5 9.5c.5 1 1.5 3 3 4.5 1.5 1.5 3.5 2.5 4.5 3l1-2-2-1-1 1c-1-.5-2-1.5-3-2.5s-2-2-2.5-3l1-1-1-2-2 1z" fill="white"/>
+        </svg>
+        WhatsApp nudges  ·  Days 8–10
+      </div>
+    </div>
+
+    <!-- Call 4 -->
+    <div class="row right">
+      <div class="gap"></div>
+      <div class="dot-wrap"><div class="dot amber"></div></div>
+      <div class="slot">
+        <div class="card amber">
+          <div class="tag">Call 4  ·  Day 11</div>
+          <div class="title">Screen Time · Reinforcement</div>
+          <div class="sub">Review commitment · Problem-solve barriers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 3 band -->
+    <div class="band coral">Module 3 — Healthy Off-Phone Habits</div>
+
+    <!-- Call 5 -->
+    <div class="row left">
+      <div class="slot">
+        <div class="card coral">
+          <div class="tag">Call 5  ·  Day 14</div>
+          <div class="title">Off-Phone · Awareness &amp; First Commitment</div>
+          <div class="sub">Goals: off-phone zones &amp; times · alternative activities</div>
+        </div>
+      </div>
+      <div class="dot-wrap"><div class="dot coral"></div></div>
+      <div class="gap"></div>
+    </div>
+
+    <!-- WhatsApp nudge -->
+    <div class="wa-row">
+      <div class="wa-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="#22C55E"/>
+          <path d="M8.5 9.5c.5 1 1.5 3 3 4.5 1.5 1.5 3.5 2.5 4.5 3l1-2-2-1-1 1c-1-.5-2-1.5-3-2.5s-2-2-2.5-3l1-1-1-2-2 1z" fill="white"/>
+        </svg>
+        WhatsApp nudges  ·  Days 15–17
+      </div>
+    </div>
+
+    <!-- Call 6 -->
+    <div class="row right">
+      <div class="gap"></div>
+      <div class="dot-wrap"><div class="dot coral"></div></div>
+      <div class="slot">
+        <div class="card coral">
+          <div class="tag">Call 6  ·  Day 18</div>
+          <div class="title">Off-Phone · Reinforcement</div>
+          <div class="sub">Consolidate all 3 modules · celebrate progress</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post-intervention -->
+    <div class="post-dot-row"><div class="post-dot"></div></div>
+    <div class="post-row">
+      <div class="post-card">
+        <div class="tag">Post Day 18  ·  Ongoing Support</div>
+        <div class="title">WhatsApp Follow-Up</div>
+        <div class="sub">Encouraging messages · Sustain habits</div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#2563EB"></div> Sleep
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#F59E0B"></div> Screen Time
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#EF4444"></div> Off-Phone
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#22C55E"></div> Follow-Up &amp; WhatsApp
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
