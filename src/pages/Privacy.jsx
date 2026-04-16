@@ -105,7 +105,6 @@ function Privacy() {
           <ul>
             <li>{t('privacyYouthItem1')}</li>
             <li>{t('privacyYouthItem2')}</li>
-            <li>{t('privacyYouthItem3')}</li>
           </ul>
           <p>{t('privacyYouthNote')}</p>
         </section>
@@ -121,8 +120,8 @@ function Privacy() {
           <div className="contact-card">
             <p>
               <strong>Duncan Webb</strong><br />
-              Nova School of Business and Economics<br />
-              <a href="mailto:duncan.webb@novasbe.pt">duncan.webb@novasbe.pt</a>
+              Email: <a href="mailto:dmbwebb@gmail.com">dmbwebb@gmail.com</a><br />
+              WhatsApp: +33 7 82 64 65 07
             </p>
           </div>
         </section>
