@@ -29,55 +29,38 @@ function Registration() {
         </div>
       </nav>
 
-      <main className="content container">
+      <main className="content content--wide">
         <header className="content-header fade-in-up">
           <h1>{t('registerTitle')}</h1>
           <p className="last-updated">{t('registerSubtitle')}</p>
         </header>
 
-        <section className="section fade-in-up delay-1">
-          <h2>Solicita más información sobre el programa</h2>
-          <div className="form-embed">
-            <iframe
-              src="https://whatsform.com/8aHdM4"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              title="Solicita más información sobre el programa"
-            />
-          </div>
-        </section>
+        <div className="register-split fade-in-up delay-1">
+          <section className="register-split__col register-split__col--form">
+            <h2>{t('registerWhatsappTitle')}</h2>
+            <div className="form-embed">
+              <iframe
+                src="https://whatsform.com/8aHdM4"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                title={t('registerWhatsappTitle')}
+              />
+            </div>
+          </section>
 
-        <section className="section fade-in-up delay-1">
-          <h2>{t('registerVideoTitle')}</h2>
-          <div className="video-embed">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/Jvzp7VM_z7I?modestbranding=1&rel=0"
-              width="100%"
-              title={t('registerVideoTitle')}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </section>
-
-        <section className="section fade-in-up" style={{ marginTop: 'var(--space-xl)' }}>
-          <h2>{t('registerFormTitle')}</h2>
-          <p>{t('registerFormHint')}</p>
-        </section>
-
-        <div className="form-embed fade-in-up">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSe_1D4CRYNnnoM-hpaqk7t4h4m4CifkbKggf-Ha-2n6u4nIAg/viewform?embedded=true"
-            width="100%"
-            height="2451"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-            title={t('registerTitle')}
-          >
-            {t('registerLoading')}
-          </iframe>
+          <section className="register-split__col register-split__col--video">
+            <h2>{t('registerVideoTitle')}</h2>
+            <div className="video-embed">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/Jvzp7VM_z7I?modestbranding=1&rel=0"
+                width="100%"
+                title={t('registerVideoTitle')}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </section>
         </div>
 
         <Link to="/" className="back-link fade-in-up">

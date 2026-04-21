@@ -93,6 +93,24 @@ function Home() {
                 <span className="feature-card__label">{t('featurePrivacy')}</span>
               </div>
             </div>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.miritmodigital.app"
+              className="play-store-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('playStoreAria')}
+            >
+              <svg className="play-store-btn__icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="#00C3FF" d="M45.3 21.1c-7.1 4-12 11.5-12 20.2v429.3c0 8.7 4.9 16.2 12 20.2l237.3-234.9z"/>
+                <path fill="#FFC700" d="M395.5 208.7l-77.9-45.1-43 42.4 43 42.4 78-45.1c23.9-13.7 23.9-31 0-44.6z"/>
+                <path fill="#FF3A44" d="M317.6 163.6L45.3 21.1c-2.5-1.5-5.2-2.3-8-2.5l253.3 251 27-106z"/>
+                <path fill="#00A651" d="M290.6 241.5L37.3 492.9c2.8-0.3 5.5-1.1 8-2.5l272.3-142.5z"/>
+              </svg>
+              <span className="play-store-btn__text">
+                <span className="play-store-btn__small">{t('playStoreGetItOn')}</span>
+                <span className="play-store-btn__big">Google Play</span>
+              </span>
+            </a>
             <Link to="/privacy" className="cta-link">
               <span>{t('ctaText')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">

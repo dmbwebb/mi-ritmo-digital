@@ -19,6 +19,8 @@ const translations = {
     featureBudgets: 'Time spent in each app',
     featurePrivacy: 'Private & secure',
     ctaText: 'Learn about your data',
+    playStoreGetItOn: 'GET IT ON',
+    playStoreAria: 'Get Mi Ritmo Digital on Google Play',
 
     // Home — Parental Program tab
     programSubtitle: 'A guidance program for parents and caregivers on healthy smartphone use in adolescence.',
@@ -124,10 +126,8 @@ const translations = {
     // Registration
     registerTitle: 'Mi Ritmo Digital - Registration Form',
     registerSubtitle: 'GUIDANCE PROGRAM FOR PARENTS AND CAREGIVERS ON HEALTHY SMARTPHONE USE IN ADOLESCENCE',
-    registerVideoTitle: 'Motivation Video to Join the Program',
-    registerFormTitle: 'Registration Form',
-    registerFormHint: 'Complete the form below to register for the program. Scroll down to fill out all fields.',
-    registerLoading: 'Loading…',
+    registerVideoTitle: 'Why join the program?',
+    registerWhatsappTitle: 'Join the free program — write to us!',
   },
   es: {
     // Nav
@@ -145,6 +145,8 @@ const translations = {
     featureBudgets: 'Límites por app',
     featurePrivacy: 'Privado y seguro',
     ctaText: 'Conoce sobre tus datos',
+    playStoreGetItOn: 'DISPONIBLE EN',
+    playStoreAria: 'Descarga Mi Ritmo Digital en Google Play',
 
     // Home — Parental Program tab
     programSubtitle: 'Un programa de orientación para padres, madres y cuidadores sobre el uso saludable del celular en la adolescencia.',
@@ -250,10 +252,8 @@ const translations = {
     // Registration
     registerTitle: 'Mi Ritmo Digital - Formulario de Registro',
     registerSubtitle: 'PROGRAMA DE ORIENTACIÓN A PADRES, MADRES Y CUIDADORES EN EL USO SALUDABLE DE CELULARES EN LA ADOLESCENCIA',
-    registerVideoTitle: 'Video de Motivación para Inscribirse en el Programa',
-    registerFormTitle: 'Formulario de Registro',
-    registerFormHint: 'Completa el formulario a continuación para inscribirte en el programa. Desplázate hacia abajo para llenar todos los campos.',
-    registerLoading: 'Cargando…',
+    registerVideoTitle: '¿Por qué inscribirte al programa?',
+    registerWhatsappTitle: '¡Inscríbete al programa gratuito — escríbenos!',
   },
 }
 

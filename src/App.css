@@ -365,6 +365,57 @@
 }
 
 /* ═══════════════════════════════════════
+   GOOGLE PLAY INSTALL BUTTON
+═══════════════════════════════════════ */
+.play-store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1.4rem;
+  background: #000000;
+  border-radius: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.play-store-btn:hover {
+  background: #1a1a1a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.play-store-btn__icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.play-store-btn__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.play-store-btn__small {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.play-store-btn__big {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ═══════════════════════════════════════
    GAUGE INDICATOR (kept for compatibility)
 ═══════════════════════════════════════ */
 .gauge-indicator {
@@ -626,6 +677,66 @@ ol.numbered-list li::before {
 }
 
 /* ═══════════════════════════════════════
+   WIDE CONTENT (used on Registration)
+═══════════════════════════════════════ */
+.content--wide {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   REGISTRATION SPLIT — form + video side-by-side
+═══════════════════════════════════════ */
+.register-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  align-items: start;
+}
+
+.register-split__col {
+  min-width: 0;
+}
+
+.register-split__col h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.register-split__col h2::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-bright));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.register-split .form-embed,
+.register-split .video-embed {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .register-split {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .register-split .video-embed {
+    max-width: 340px;
+  }
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 640px) {
@@ -667,9 +778,5 @@ ol.numbered-list li::before {
     padding: 0.7rem 1.1rem;
     font-size: 0.85rem;
     border-radius: 14px;
-  }
-
-  .form-embed iframe {
-    height: 2600px;
   }
 }
