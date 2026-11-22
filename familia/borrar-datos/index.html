@@ -1,0 +1,99 @@
+<!doctype html>
+<!--
+  Página «Borrar mis datos» de «Mi Ritmo Digital en Familia».
+  Publicada en https://www.miritmodigital.com/familia/borrar-datos/ (Play › Data safety › "Delete account URL").
+  Play pide que la página nombre la app y al desarrollador y diga los pasos.
+  Pedidos por correo/WhatsApp: el equipo usa manage.py delete_member (ver Familia-Server/DEPLOY.md).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borrar mis datos — Mi Ritmo Digital en Familia</title>
+<style>
+  :root {
+    --blue: #2563EB; --text-primary: #1E293B; --text-secondary: #475569; --text-muted: #94a3b8;
+    --surface: rgba(37, 99, 235, 0.05); --border: rgba(0, 0, 0, 0.07);
+    --bg-gradient: linear-gradient(150deg, #ffffff 0%, #FFF8F0 45%, #F0F5FF 100%);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; background-image: var(--bg-gradient); background-attachment: fixed; color: var(--text-primary);
+         line-height: 1.6; font-size: 17px; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  h1, h2 { font-family: 'Nunito', -apple-system, sans-serif; font-weight: 800; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.3rem; margin: 0 0 .6rem; }
+  .nav { display: flex; align-items: center; gap: .6rem; padding: 1rem 16px; max-width: 760px; margin: 0 auto; }
+  .nav img { width: 36px; height: 36px; border-radius: 8px; }
+  .nav span { font-family: 'Nunito', sans-serif; font-weight: 800; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px 3rem; }
+  .sub { color: var(--text-secondary); margin: 0 0 1.5rem; }
+  .section { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.25rem .5rem; margin-bottom: 1rem; }
+  .section p, .section ul, .section ol { margin: 0 0 .9rem; }
+  .section ul, .section ol { padding-left: 1.2rem; }
+  .todo { background: #FEF3C7; padding: 0 .25rem; border-radius: 4px; }
+  a { color: var(--blue); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --text-primary: #E2E8F0; --text-secondary: #CBD5E1; --border: rgba(255,255,255,.12); }
+    :root:not([data-theme="light"]) body { background: #0F172A; background-image: none; }
+    :root:not([data-theme="light"]) .section { background: #111827; }
+    :root:not([data-theme="light"]) .todo { background: #713F12; }
+  }
+</style>
+</head>
+<body>
+  <nav class="nav"><img src="/logo.png" alt=""><span>Mi Ritmo Digital en Familia</span></nav>
+  <main class="container">
+    <h1>Borrar mis datos</h1>
+    <p class="sub">App «Mi Ritmo Digital en Familia», publicada en Google Play por Multilink Colombia, para el estudio Mi Ritmo Digital (Nova School of Business and Economics).</p>
+
+    <section class="section">
+      <h2>Opción 1: desde la app (al momento)</h2>
+      <ol>
+        <li>Abre la app y toca el engranaje (Ajustes).</li>
+        <li>Toca <strong>«Salir de la familia»</strong>.</li>
+        <li>Toca <strong>«Sí, salir y borrar mis datos»</strong>.</li>
+      </ol>
+      <p>Listo. Tus datos se borran en ese momento. No se puede deshacer.</p>
+    </section>
+
+    <section class="section">
+      <h2>Opción 2: pídeselo al equipo</h2>
+      <p>Úsala si ya desinstalaste la app, si perdiste el celular o si eres madre, padre o cuidador y quieres borrar los datos de tu hijo o hija.</p>
+      <ol>
+        <li>Escríbenos al correo <a href="mailto:duncan.webb@novasbe.pt">duncan.webb@novasbe.pt</a> o por WhatsApp al <a href="https://wa.me/573107224553">+57 310 722 4553</a>.</li>
+        <li>Pon como asunto: «Borrar mis datos — Mi Ritmo Digital en Familia».</li>
+        <li>Dinos el nombre que usaste en la app (por ejemplo «Mamá») y el código de tu familia.</li>
+      </ol>
+      <p>Lo borramos en máximo 30 días y te confirmamos.</p>
+    </section>
+
+    <section class="section">
+      <h2>Qué se borra</h2>
+      <ul>
+        <li>Tu nombre en la app, tu parentesco y tu rol.</li>
+        <li>Todos tus resúmenes semanales (tiempo, apps más usadas, noche, redes).</li>
+        <li>Tu meta y tus respuestas de cada semana.</li>
+        <li>Tus mensajes, los que enviaste y los que recibiste.</li>
+        <li>El registro de cuándo aceptaste o pausaste.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Qué se guarda</h2>
+      <ul>
+        <li>Conteos de uso de la app por familia y semana, sin nombres (por ejemplo «1 adulto entró»). Son para la investigación y se guardan hasta 5 años.</li>
+        <li>El nombre de la familia y su código, mientras quede alguien de la familia en el estudio, o hasta que termine el estudio.</li>
+        <li>Las copias de seguridad guardan los datos hasta 30 días. Después se borran solas.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Ojo</h2>
+      <p>Si solo desinstalas la app, tus datos <strong>no</strong> se borran. Primero sal de la familia, o usa la opción 2.</p>
+      <p>Si quieres dejar de compartir sin borrar nada, usa <strong>«Pausar»</strong> en Ajustes. Mientras tienes la pausa, tu celular no envía nada.</p>
+      <p>Borrar los datos de esta app no te saca del estudio Mi Ritmo Digital. Para eso, habla con el equipo.</p>
+      <p><a href="/familia/privacidad/">Política de privacidad</a></p>
+    </section>
+  </main>
+</body>
+</html>

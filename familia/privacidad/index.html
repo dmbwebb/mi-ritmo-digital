@@ -1,0 +1,190 @@
+<!doctype html>
+<!--
+  Política de privacidad de «Mi Ritmo Digital en Familia».
+  Publicada en https://www.miritmodigital.com/familia/privacidad/
+  Fuente: familia_mockup/launch/privacidad_familia.html → copiada a
+  phone_dash_website/public/familia/privacidad/index.html (HTML plano: HTTP 200 sin JavaScript).
+  Basada en el código del 2026-11-22 (Familia-Server, Familia-Web, Familia-Android 0.1.3).
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacidad — Mi Ritmo Digital en Familia</title>
+<style>
+  :root {
+    --blue: #2563EB; --yellow: #F59E0B; --coral: #EF4444;
+    --text-primary: #1E293B; --text-secondary: #475569; --text-muted: #94a3b8;
+    --surface: rgba(37, 99, 235, 0.05); --border: rgba(0, 0, 0, 0.07);
+    --bg-gradient: linear-gradient(150deg, #ffffff 0%, #FFF8F0 45%, #F0F5FF 100%);
+    --radius-md: 16px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #ffffff; background-image: var(--bg-gradient); background-attachment: fixed;
+    color: var(--text-primary); line-height: 1.6; font-size: 17px;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  h1, h2 { font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 800; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.3rem; margin: 0 0 .6rem; }
+  .nav { display: flex; align-items: center; gap: .6rem; padding: 1rem 16px; max-width: 760px; margin: 0 auto; }
+  .nav img { width: 36px; height: 36px; border-radius: 8px; }
+  .nav span { font-family: 'Nunito', sans-serif; font-weight: 800; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px 3rem; }
+  .last-updated { color: var(--text-muted); margin: 0 0 1.5rem; }
+  .section { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem 1.25rem .5rem; margin-bottom: 1rem; }
+  .section p, .section ul, .section ol { margin: 0 0 .9rem; }
+  .section ul, .section ol { padding-left: 1.2rem; }
+  .section li { margin-bottom: .35rem; }
+  .key { background: var(--surface); border-left: 4px solid var(--blue); padding: .75rem 1rem; border-radius: 8px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: .95rem; }
+  th, td { text-align: left; padding: .5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-secondary); font-weight: 700; }
+  .todo { background: #FEF3C7; padding: 0 .25rem; border-radius: 4px; }
+  a { color: var(--blue); }
+  .footer { text-align: center; color: var(--text-muted); font-size: .9rem; padding: 2rem 16px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --text-primary: #E2E8F0; --text-secondary: #CBD5E1; --border: rgba(255,255,255,.12); --surface: rgba(59,130,246,.12); }
+    :root:not([data-theme="light"]) body { background: #0F172A; background-image: none; }
+    :root:not([data-theme="light"]) .section { background: #111827; }
+    :root:not([data-theme="light"]) .todo { background: #713F12; }
+  }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <img src="/logo.png" alt="">
+    <span>Mi Ritmo Digital en Familia</span>
+  </nav>
+
+  <main class="container">
+    <header>
+      <h1>Política de privacidad</h1>
+      <p class="last-updated">Mi Ritmo Digital en Familia · Última actualización: 22 de noviembre de 2026</p>
+    </header>
+
+    <section class="section">
+      <h2>En pocas palabras</h2>
+      <div class="key">
+        <ul>
+          <li>Tú decides si compartes. Nadie puede aceptar por ti.</li>
+          <li>Solo se comparte un resumen de la semana. Nunca el uso en vivo, ni lo que ves, escribes o buscas.</li>
+          <li>La cuenta del tiempo se hace en tu celular.</li>
+          <li>Si pausas, tu celular no envía nada.</li>
+          <li>No pedimos tu correo, tu número de celular ni tus apellidos.</li>
+          <li>No hay anuncios. No vendemos ni compartimos tus datos.</li>
+          <li>Si sales de la familia, se borran tus datos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Qué es esta app</h2>
+      <p>«Mi Ritmo Digital en Familia» hace parte del estudio de investigación Mi Ritmo Digital, de Nova School of Business and Economics (Portugal), con familias de colegios públicos de Bogotá. Es solo para algunas familias del estudio. Se entra con un código de 6 números que te da el equipo.</p>
+      <p>En la app, cada persona de la familia que decide compartir ve un resumen semanal del uso del celular de las demás personas que también comparten. Cada persona elige su propia meta y puede mandar mensajes cortos para animar.</p>
+      <p>Esta app es <strong>distinta</strong> de la app «Mi Ritmo Digital» que mide el uso del celular para el estudio. Son apps separadas, con servidores y bases de datos separadas.</p>
+    </section>
+
+    <section class="section">
+      <h2>Qué datos guardamos</h2>
+      <table>
+        <tr><th>Dato</th><th>Para qué</th></tr>
+        <tr><td><strong>Tu nombre o cómo te dicen en casa</strong> (por ejemplo «Sofía» o «Mamá»), si eres adulto o hijo/a y tu parentesco (por ejemplo «Hija»).</td><td>Para que tu familia sepa quién eres.</td></tr>
+        <tr><td><strong>El nombre de la familia</strong>, que escribe la primera persona que entra.</td><td>Para mostrarlo arriba en la app.</td></tr>
+        <tr><td><strong>Tu resumen de la semana</strong>: tiempo promedio en el celular por día, tus 3 apps más usadas (nombre y minutos), minutos de uso de noche (de 10 p. m. a 6 a. m.), minutos en redes sociales y cuántos días tienen dato.</td><td>Para mostrarlo a tu familia mientras compartes.</td></tr>
+        <tr><td><strong>Tu meta</strong> (una de 4 metas fijas) y si la cumpliste esa semana.</td><td>Para mostrar cómo vas.</td></tr>
+        <tr><td><strong>Tus mensajes</strong>: el mensaje que eliges y una nota corta opcional (máximo 140 letras).</td><td>Para que le llegue a la persona de tu familia.</td></tr>
+        <tr><td><strong>Cuándo aceptaste compartir y cuándo pausaste.</strong></td><td>Para respetar tu decisión.</td></tr>
+        <tr><td><strong>Conteos de uso de la app</strong> por familia y por semana: cuántas personas entraron, aceptaron, enviaron su resumen o un mensaje. Sin nombres.</td><td>Para que el estudio sepa si las familias usan la app.</td></tr>
+        <tr><td><strong>Datos técnicos</strong>: la dirección IP y la hora de cada conexión (registros normales del servidor), y la IP de un código de familia equivocado.</td><td>Para que el servicio funcione y para frenar a quien intente adivinar códigos.</td></tr>
+      </table>
+      <p>En iPhone o en el navegador, tú anotas tu tiempo de la semana. Solo se guarda el número que escribes.</p>
+    </section>
+
+    <section class="section">
+      <h2>Qué NO guardamos</h2>
+      <ul>
+        <li>Tu ubicación, tus contactos, tus fotos ni tus archivos.</li>
+        <li>Lo que ves, escribes o buscas en otras apps.</li>
+        <li>Tu uso en vivo ni hora por hora.</li>
+        <li>La lista de todas tus apps. Solo las 3 más usadas de la semana.</li>
+        <li>Tu correo, tu número de celular ni tus apellidos.</li>
+        <li>Identificadores del celular ni de publicidad.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Cómo se calcula tu tiempo (Android)</h2>
+      <p>Para calcular tu tiempo, la app necesita el permiso <strong>«Acceso al uso»</strong>. Es el mismo dato que muestra tu celular en Bienestar digital. Tú lo activas en los Ajustes del celular, y lo puedes quitar cuando quieras.</p>
+      <p>La cuenta se hace <strong>en tu celular</strong>. Del celular solo sale el resumen de la semana. El celular lo envía el domingo en la noche, el lunes en la mañana, el miércoles en la noche (lo que va de la semana) y cuando abres la app. Antes de enviar, pregunta si estás compartiendo. Si tienes la pausa activada, no envía nada.</p>
+      <p>Otros permisos: Internet (para enviar el resumen), notificaciones (para el aviso del domingo y del miércoles y, si lo activas, el recordatorio de la noche; puedes decir que no) y arrancar con el celular (para volver a programar el envío semanal).</p>
+    </section>
+
+    <section class="section">
+      <h2>Quién ve tus datos</h2>
+      <ul>
+        <li><strong>Tu familia en la app</strong>: ve tu resumen y tu meta solo mientras tú compartes y solo si en la familia comparten al menos un adulto y un hijo o hija. Los adultos y los hijos ven lo mismo. Nadie tiene controles sobre otra persona.</li>
+        <li>Si no compartes, tu familia solo ve tu nombre y «No compartió esta semana». Y tú tampoco ves a tu familia.</li>
+        <li><strong>Tus mensajes</strong> los ve solo la persona a quien se los mandas.</li>
+        <li><strong>El equipo del estudio</strong> no mira los resúmenes, las metas ni los mensajes de las familias. Solo usa los conteos de uso de la app (sin nombres). Algunas personas del equipo técnico tienen acceso al servidor para que funcione.</li>
+        <li><strong>Nadie más.</strong> No vendemos ni compartimos tus datos con otras empresas. El servidor está en DigitalOcean, en Estados Unidos (San Francisco), y solo guarda los datos para nosotros.</li>
+      </ul>
+      <p>Los datos de esta app no se usan para medir los resultados del estudio. Esos datos los toma la otra app, «Mi Ritmo Digital».</p>
+    </section>
+
+    <section class="section">
+      <h2>Seguridad</h2>
+      <ul>
+        <li>Los datos viajan cifrados (HTTPS).</li>
+        <li>Tu celular guarda una clave para entrar. En el servidor solo guardamos una versión cifrada de esa clave.</li>
+        <li>El servidor tiene acceso restringido.</li>
+        <li>El código de la familia es privado. No lo compartas fuera de tu familia. Si alguien que no es de tu familia entra, avísanos.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Niños, niñas y adolescentes</h2>
+      <p>Pueden usar la app hijos e hijas de 11 a 17 años de las familias del estudio. Antes, sus padres o cuidadores dieron su consentimiento para el estudio, con un formulario en línea durante la llamada de introducción. Además, cada hijo o hija acepta compartir en su propio celular. Nadie puede aceptar por otra persona.</p>
+      <p>Los padres o cuidadores pueden pedir que se borren los datos de su hijo o hija en cualquier momento.</p>
+    </section>
+
+    <section class="section">
+      <h2>Cuánto tiempo guardamos tus datos</h2>
+      <ul>
+        <li>Mientras estés en la familia, o hasta que termine el estudio. Ese día borramos todo lo de la app.</li>
+        <li>Las copias de seguridad se borran solas a los 30 días.</li>
+        <li>Los conteos de uso de la app, sin nombres, se pueden guardar para la investigación hasta 5 años.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="borrar">
+      <h2>Cómo borrar tus datos</h2>
+      <ol>
+        <li>Abre la app y toca el engranaje (Ajustes).</li>
+        <li>Toca <strong>«Salir de la familia»</strong>.</li>
+        <li>Toca <strong>«Sí, salir y borrar mis datos»</strong>.</li>
+      </ol>
+      <p>Se borran al momento tu nombre, tus resúmenes, tu meta, tus mensajes (enviados y recibidos) y tu registro de cuándo compartiste. No se puede deshacer.</p>
+      <p><strong>Ojo:</strong> si solo desinstalas la app, tus datos <strong>no</strong> se borran. Sal de la familia antes de desinstalar. Si ya la desinstalaste, escríbenos y los borramos nosotros.</p>
+      <p>Más detalles en <a href="/familia/borrar-datos/">Borrar mis datos</a>.</p>
+    </section>
+
+    <section class="section">
+      <h2>Tus derechos</h2>
+      <p>Puedes pausar o dejar de compartir cuando quieras. Puedes salir de la familia y borrar tus datos. Puedes pedir una copia de tus datos o pedir que los corrijamos. Usar esta app es voluntario.</p>
+      <p>En Colombia, tus datos están protegidos por la Ley 1581 de 2012. Si crees que no respetamos tus derechos, puedes escribirnos o acudir a la Superintendencia de Industria y Comercio.</p>
+    </section>
+
+    <section class="section">
+      <h2>Contacto</h2>
+      <p>Si tienes preguntas sobre esta política o tus datos, escríbenos:</p>
+      <p><strong>Equipo Mi Ritmo Digital</strong><br>Duncan Webb · Nova School of Business and Economics<br>Correo: <a href="mailto:duncan.webb@novasbe.pt">duncan.webb@novasbe.pt</a><br>WhatsApp: <a href="https://wa.me/573107224553">+57 310 722 4553</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Desarrollado para investigación académica · Nova School of Business and Economics</p>
+  </footer>
+</body>
+</html>
